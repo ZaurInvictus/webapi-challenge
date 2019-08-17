@@ -51,6 +51,31 @@ router.post("/:id", validateProjectId, (req, res) => {
 
 
 
+// DELETE ACTION
+router.delete("/:id", (req, res) => {
+  Actions.remove(req.params.id)
+  
+  // remove - returns number of deleted items or 0 if 0 deleted
+  .then(number => {
+    if(number && number > 0) {
+      res.status(200).json({
+        message: 'Action was deleted'
+      })
+    } else {
+      res.status(404).json({
+        message: "The action with the specified ID doesn't exist"
+      })
+    }
+  })
+   .catch(() => {
+     res.status(500).json({error: "Internal server error"})
+   })
+})
+
+
+
+
+
 // CUSTOM MIDDLEWARE
 
 // VALIDATE PROJECT ID
