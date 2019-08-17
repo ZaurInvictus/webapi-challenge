@@ -26,13 +26,28 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+Server-Side Routing with Express
+Express Middleware
+
 - [ ] Describe Middleware?
+
+Middleware is function that extends software. We use it to add features to Express. Middleware is the biggest feature of Express. Most code we write including route handlers is actually middleware. It can be considered as an array of functions that get executed in the order they are introduced into the server code.
+They are tree types of middleware:
+Built-in middleware.
+Third party middleware.
+Custom middleware.
 
 - [ ] Describe a Resource?
 
+Express-resource provides resourceful routing to express. 
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+Status codes and messages.
+
 - [ ] How can we partition our application into sub-applications?
+
+By importing and exporting routes and using them by calling via use() function.
 
 ## Project Setup
 
