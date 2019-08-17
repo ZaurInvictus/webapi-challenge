@@ -74,6 +74,31 @@ router.delete("/:id", (req, res) => {
 
 
 
+// UPDATE ACTIONS
+router.put('/:id', (req, res) => {
+  const { notes, description } = req.body
+  //WITH NO DESTRUCTURING
+  //const notes = req.body.name
+  //const description = req.body.description
+  if(!notes || !description) {
+    res.status(400).json({ message: 'Please provide notes and description'})
+  } else {
+    Actions.update(req.params.id, req.body)
+    //PASSING DATA WITH NO DESTRUCTURING VERSION
+    //Projects.update(req.params.id, {notes, description})
+    .then(user => {
+      if(user) {
+        res.status(200).json(user)
+      } else {
+        res.status(404).json({message: "The action with the specified ID does not exist"})
+      }
+    })
+    .catch(() => {
+      res.status(500).json({message: 'Internal server error'})
+    })
+  }
+})
+
 
 
 // CUSTOM MIDDLEWARE
@@ -99,5 +124,6 @@ function validateProjectId(req, res, next) {
     })
   })
 };
+
 
 module.exports = router
