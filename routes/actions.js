@@ -20,25 +20,17 @@ router.get('/', (req, res) => {
 
 
 // POST ACTION
-router.post("/:id", validateProjectId, (req, res) => {
-  const { id }  = req.params
-  const { description, notes } = req.body
+router.post("/", validateProjectId, (req, res) => {
+  const { description, notes, project_id } = req.body
 
-  if(!notes || !description) {
+  if(!notes || !description || !project_id) {
     res.status(400).json({
-      message: "Please provide notes and description!"
+      message: "Data must include notes project_id, and description fields!"
     })
     return
   }
 
-  if(!req.project) {
-    res.status(400).json({
-      message: "Invalid project ID!"
-    })
-    return
-  }
-
-  Actions.insert({description, notes, project_id: id})
+  Actions.insert({ description, notes, project_id })
   .then(action => {
       res.status(201).json(action)
   })
@@ -105,8 +97,9 @@ router.put('/:id', (req, res) => {
 
 // VALIDATE PROJECT ID
 function validateProjectId(req, res, next) {
-  
-  Projects.get(req.params.id)
+  const id = req.body.project_id
+
+  Projects.get(id)
 
   .then(project => {
     if(project) {
@@ -114,7 +107,7 @@ function validateProjectId(req, res, next) {
       next()
     } else {
       res.status(400).json({
-        message: "invalid project id" 
+        message: 'Project ID not found'
       })
     }
   })

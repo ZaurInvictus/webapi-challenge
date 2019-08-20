@@ -39,15 +39,23 @@ Custom middleware.
 
 - [ ] Describe a Resource?
 
-Express-resource provides resourceful routing to express. 
+In REST architecture a Resource is any sort of data that you would typically
+perform CRUD operations on. For instance in an application you may have a User
+resource, as well as a Post resource.
 
 - [ ] What can the API return to help clients know if a request was successful?
 
 Status codes and messages.
+Depending on what operation the user is performing you can return an HTTP status
+code, as well as JSON data or a server rendered web page.
 
 - [ ] How can we partition our application into sub-applications?
 
 By importing and exporting routes and using them by calling via use() function.
+When using Express, you can use the Router API to split out your application by
+resources. For instance using our Users, and Posts resources as an example you
+can split the Users resource into its own Router file and the Posts resource
+into its own Router file.
 
 ## Project Setup
 
